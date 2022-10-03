@@ -5,17 +5,32 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+  data: function () {
+    return {
+      cars: []
+    }
+  },
   methods: {
-    log() {
-      console.log("App");
+    getCar: function () {
+      axios.get('api/cars')
+        .then((element) => {
+          this.cars = element.data.results.data;
+
+          console.log(this.cars);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     },
   },
   created() {
-    this.log();
+    this.getCar();
   },
 };
 </script>
 
 <style>
+
 </style>
